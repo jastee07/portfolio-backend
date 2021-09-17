@@ -9,4 +9,4 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 class PostViewset(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_class = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
