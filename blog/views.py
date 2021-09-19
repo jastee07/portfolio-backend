@@ -10,6 +10,7 @@ class PostViewset(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
+    lookup_field = 'slug'
 
 
     def get_queryset(self):
