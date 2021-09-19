@@ -11,3 +11,4 @@ class PostSerializer(serializers.ModelSerializer):
                 'published', 'published_at', 'created_at',
                 'updated_at'
             ]
+        lookup_field = 'slug'
