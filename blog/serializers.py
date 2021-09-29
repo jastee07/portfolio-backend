@@ -9,6 +9,6 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
                 'id', 'owner', 'title', 'body',
                 'published', 'published_at', 'created_at',
-                'updated_at'
+                'updated_at', 'slug'
             ]
         lookup_field = 'slug'
