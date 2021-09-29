@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from blog.models import Post
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,6 +13,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     owner = AuthorSerializer(read_only=True)
+    slug = serializers.SerializerMethodField(method_name='get_slug')
     class Meta:
         model = Post
         fields = [
@@ -20,3 +22,6 @@ class PostSerializer(serializers.ModelSerializer):
                 'updated_at', 'slug'
             ]
         lookup_field = 'slug'
+
+    def get_slug(self, obj):
+        return slugify(obj.title)
