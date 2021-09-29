@@ -1,3 +1,4 @@
+from django.template.defaultfilters import slugify
 from rest_framework import viewsets
 from blog.models import Post
 from blog.serializers import PostSerializer
@@ -18,3 +19,9 @@ class PostViewset(viewsets.ModelViewSet):
             return Post.objects.all()
         else:
             return Post.objects.filter(published=True)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
