@@ -15,7 +15,7 @@ class PostViewset(viewsets.ModelViewSet):
 
 
     def get_queryset(self):
-        if self.request.user.is_staff and self.request.query_params.get('editor') == 'true':
+        if self.request.user.is_staff:
             return Post.objects.all()
         else:
             return Post.objects.filter(published=True)
