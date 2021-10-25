@@ -23,3 +23,29 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+class Tag(models.Model):
+    post = models.ManyToManyField(Post)
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True, null=False)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs): # new
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
+
+class Category(models.Model):
+    post = models.ManyToManyField(Post)
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True, null=False)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs): # new
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
